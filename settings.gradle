@@ -1,0 +1,8 @@
+include ':features:example1_api'
+include ':features:example2_api'
+include ':features:example2'
+include ':features:example1'
+include ':data'
+include ':entities'
+include ':app'
+rootProject.name = "BaseArchitectureExample"
