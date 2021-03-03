@@ -20,6 +20,11 @@ ext {
     bottomNavigationViewExVersion = '1.2.4'
     circleImageViewVersion = '3.1.0'
     mpAndroidChartVersion = 'v3.1.0'
+    lifecycleVersion = '1.1.0'
+
+    //Lifecycle
+    lifecycleExtensions = "android.arch.lifecycle:extensions:$lifecycleVersion"
+    lifecycleCompiler = "android.arch.lifecycle:compiler:$lifecycleVersion"
 
     //Dagger
     dagger = "com.google.dagger:dagger:$daggerVersion"
