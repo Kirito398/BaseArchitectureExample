@@ -1,4 +1,4 @@
-package ru.bis.entities
+package ru.sir.core
 
 abstract class UseCase<out Type, in Params, out Failure> {
     abstract fun run(params: Params): Either<Failure, Type>

@@ -1,7 +1,7 @@
 package ru.bis.example1_api.interfaces
 
-import ru.bis.entities.Either
-import ru.bis.entities.None
+import ru.sir.core.Either
+import ru.sir.core.None
 
 interface Repository {
     fun getDataFromCache(): Either<None, String>

@@ -1,7 +1,7 @@
 package ru.bis.example1.presentation.interfaces
 
 import androidx.lifecycle.LifecycleObserver
-import ru.bis.entities.None
+import ru.sir.core.None
 
 interface Example1ViewContract {
     interface View {

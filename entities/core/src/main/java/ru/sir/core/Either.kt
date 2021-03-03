@@ -1,4 +1,4 @@
-package ru.bis.entities
+package ru.sir.core
 
 sealed class Either<out L, out R> {
     data class Left<out L>(val l: L) : Either<L, Nothing>()

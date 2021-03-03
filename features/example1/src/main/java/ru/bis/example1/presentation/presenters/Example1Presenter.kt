@@ -1,8 +1,8 @@
 package ru.bis.example1.presentation.presenters
 
-import ru.bis.entities.None
 import ru.bis.example1.presentation.interfaces.Example1ViewContract
 import ru.bis.example1_api.interactor.GetDataFromCache
+import ru.sir.core.None
 
 internal class Example1Presenter(
     private val getDataFromCache: GetDataFromCache

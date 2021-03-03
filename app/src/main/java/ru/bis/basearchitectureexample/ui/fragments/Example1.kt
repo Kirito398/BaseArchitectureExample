@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_example1.*
 import ru.bis.basearchitectureexample.App
 import ru.bis.basearchitectureexample.R
-import ru.bis.entities.None
 import ru.bis.example1.di.provides.Example1ComponentProvider
 import ru.bis.example1.presentation.interfaces.Example1ViewContract
+import ru.sir.core.None
 
 class Example1 : Fragment(), Example1ViewContract.View {
     lateinit var presenter: Example1ViewContract.Presenter

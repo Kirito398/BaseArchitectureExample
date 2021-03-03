@@ -2,7 +2,7 @@ package ru.bis.data.remote
 
 import retrofit2.Call
 import retrofit2.Response
-import ru.bis.entities.Either
+import ru.sir.core.Either
 
 abstract class BaseRequest<Failure> (private val networkHandler: NetworkHandler) {
     fun <Response, Type> make(call: Call<Type>, transform: (Type) -> Response): Either<Failure, Response> {
