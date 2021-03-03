@@ -1,4 +1,4 @@
-package ru.bis.entities
+package ru.sir.core
 
 import kotlinx.coroutines.*
 
