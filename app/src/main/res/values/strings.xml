@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">BaseArchitectureExample</string>
-    <string name="data_text">Data</string>
-    <string name="example2_title">Example 2 Fragment</string>
 </resources>

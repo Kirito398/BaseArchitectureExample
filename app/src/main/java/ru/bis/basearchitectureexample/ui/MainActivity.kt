@@ -3,7 +3,7 @@ package ru.bis.basearchitectureexample.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import ru.bis.basearchitectureexample.R
-import ru.bis.basearchitectureexample.ui.fragments.Example2
+import ru.bis.example2.ui.fragments.Example2
 import ru.bis.example1.ui.fragments.Example1
 
 class MainActivity : AppCompatActivity() {

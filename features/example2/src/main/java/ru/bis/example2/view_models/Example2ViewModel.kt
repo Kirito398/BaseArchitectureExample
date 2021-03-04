@@ -1,36 +1,37 @@
-package ru.bis.example2.presentation.presenters
+package ru.bis.example2.view_models
 
-import ru.bis.example2.presentation.interfaces.Example2ViewContract
+import android.app.Application
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import ru.bis.example2.R
 import ru.bis.example2_api.interactor.GetDataFromServer
 import ru.bis.example2_api.type.Failure
+import ru.sir.presentation.base.BaseViewModel
+import javax.inject.Inject
 
-internal class Example2Presenter(
+class Example2ViewModel @Inject constructor(
+    application: Application,
     private val getDataFromServer: GetDataFromServer
-) : Example2ViewContract.Presenter {
-    private lateinit var view: Example2ViewContract.View
+) : BaseViewModel(application) {
 
-    override fun setView(view: Example2ViewContract.View) {
-        this.view = view
-    }
+    val isLoading = ObservableBoolean(false)
+    val text = ObservableField(context.getString(R.string.data_text))
 
     override fun init() {
-        view.init()
-        view.setListeners()
-
         loadData()
     }
 
     private fun loadData() {
-        view.showProgressBar()
+        isLoading.set(true)
 
         getDataFromServer(GetDataFromServer.Params("Kadzuto", "Kirigaya")) {
             it.either(::onLoadDataFailed, ::onLoadDataSuccess)
+            isLoading.set(false)
         }
     }
 
     private fun onLoadDataSuccess(data: String) {
-        view.setText(data)
-        view.hideProgressBar()
+        text.set(data)
     }
 
     private fun onLoadDataFailed(failure: Failure) {
