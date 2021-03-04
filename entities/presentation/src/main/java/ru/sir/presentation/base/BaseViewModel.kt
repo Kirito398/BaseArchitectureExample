@@ -1,12 +1,15 @@
 package ru.sir.presentation.base
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import android.content.Context
+import androidx.lifecycle.*
 
 open class BaseViewModel(application: Application) : AndroidViewModel(application), LifecycleObserver {
+    open fun init() = Unit
+
+    protected val context: Context
+        get() = getApplication()
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected open fun onCreate() = Unit
 

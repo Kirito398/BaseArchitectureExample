@@ -52,4 +52,7 @@ dependencies {
 
     implementation lifecycleExtensions
     annotationProcessor lifecycleCompiler
+
+    implementation dagger
+    kapt daggerCompiler
 }
