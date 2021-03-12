@@ -55,4 +55,6 @@ dependencies {
     implementation constraintLayout
     implementation dagger
     kapt daggerCompiler
+
+    implementation recyclerView
 }
