@@ -7,11 +7,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import ru.sir.presentation.base.BaseViewModel
 
-class ViewHolderProducer<M, I : RecyclerViewBaseItem<M, VM>, VM : BaseViewModel>(val type: Int, @LayoutRes val layoutId: Int, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
+class ViewHolderProducer<M : Any, I : RecyclerViewBaseItem<M, VM>, VM : BaseViewModel>(val type: Int, @LayoutRes val layoutId: Int, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
     private lateinit var parentViewModel: VM
+    private var viewModelId: Int = -1
 
     fun setParentViewModel(viewModel: VM) {
         parentViewModel = viewModel
+    }
+
+    fun setViewModelId(id: Int) {
+        viewModelId = id
     }
 
     fun getViewType() = type
@@ -24,7 +29,7 @@ class ViewHolderProducer<M, I : RecyclerViewBaseItem<M, VM>, VM : BaseViewModel>
             false
         )
 
-        return BaseViewHolder(binding, instantiateViewModel())
+        return BaseViewHolder(binding, instantiateViewModel(), viewModelId)
     }
 
     private fun instantiateViewModel(): I {

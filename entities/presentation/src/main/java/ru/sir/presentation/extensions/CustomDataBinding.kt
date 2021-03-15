@@ -1,4 +1,4 @@
-package ru.bis.example1.view_models
+package ru.sir.presentation.extensions
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
