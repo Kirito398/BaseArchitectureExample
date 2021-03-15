@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ru.bis.example1.view_models.ItemViewModel" />
+            type="ru.bis.example1.view_models.TitleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,9 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@{viewModel.title}"
             tools:text="Item"
-            android:padding="10dp"/>
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:padding="10dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

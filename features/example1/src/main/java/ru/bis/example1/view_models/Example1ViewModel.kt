@@ -16,14 +16,24 @@ class Example1ViewModel @Inject constructor(
     private val getDataFromCache: GetDataFromCache
     ) : BaseViewModel(application) {
 
+    companion object {
+        private const val RV_TITLE = 1
+        private const val RV_ITEM = 2
+    }
+
     val result = ObservableField<String>()
     val items = mutableListOf(
-        RecyclerViewBaseDataModel("Label 1", 1),
-        RecyclerViewBaseDataModel("Label 2", 1),
-        RecyclerViewBaseDataModel("Label 3", 1),
-        RecyclerViewBaseDataModel("Label 4", 1),
-        RecyclerViewBaseDataModel("Label 5", 1),
-        RecyclerViewBaseDataModel("Label 6", 1)
+        RecyclerViewBaseDataModel("Title 1", RV_TITLE),
+        RecyclerViewBaseDataModel("Label 1", RV_ITEM),
+        RecyclerViewBaseDataModel("Title 2", RV_TITLE),
+        RecyclerViewBaseDataModel("Label 1", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 2", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 3", RV_ITEM),
+        RecyclerViewBaseDataModel("Title 3", RV_TITLE),
+        RecyclerViewBaseDataModel("Label 1", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 2", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 3", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 4", RV_ITEM),
     )
 
     override fun init() {
@@ -39,6 +49,7 @@ class Example1ViewModel @Inject constructor(
     }
 
     fun recyclerViewAdapter() = RecyclerViewAdapter.Builder(this, BR.viewModel)
-            .addProducer(1, R.layout.item_example1, String::class.java, ItemViewModel::class.java)
+            .addProducer(RV_TITLE, R.layout.item_title, String::class.java, TitleViewModel::class.java)
+            .addProducer(RV_ITEM, R.layout.item_example1, String::class.java, ItemViewModel::class.java)
             .build(items)
 }
