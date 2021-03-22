@@ -21,6 +21,7 @@ ext {
     circleImageViewVersion = '3.1.0'
     mpAndroidChartVersion = 'v3.1.0'
     lifecycleVersion = '1.1.0'
+    navigationVersion = '2.3.4'
 
     //Lifecycle
     lifecycleExtensions = "android.arch.lifecycle:extensions:$lifecycleVersion"
@@ -74,6 +75,10 @@ ext {
 
     //Coagent
     coagent = files("$rootDir/libs/coagentproxy.jar")
+
+    //Navigation Component
+    navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
     //Other
     circularProgressBar = "com.mikhaellopez:circularprogressbar:$circularProgressBarVersion"

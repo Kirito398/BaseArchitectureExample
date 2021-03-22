@@ -13,6 +13,7 @@ import javax.inject.Inject
 abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type: Class<out T>) : Fragment() {
     protected lateinit var viewModel: T
     protected lateinit var binding: B
+    protected lateinit var navigator: BaseActivity
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -28,6 +29,8 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
 
         binding = initBinding(inflater, container, savedInstanceState)
         viewModel.init()
+
+        navigator = requireActivity() as BaseActivity
         return binding.root
     }
 
