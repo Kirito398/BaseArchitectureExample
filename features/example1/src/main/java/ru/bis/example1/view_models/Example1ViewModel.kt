@@ -33,7 +33,7 @@ class Example1ViewModel @Inject constructor(
         RecyclerViewBaseDataModel("Label 1", RV_ITEM),
         RecyclerViewBaseDataModel("Label 2", RV_ITEM),
         RecyclerViewBaseDataModel("Label 3", RV_ITEM),
-        RecyclerViewBaseDataModel("Label 4", RV_ITEM),
+        RecyclerViewBaseDataModel("Label 4", RV_ITEM)
     )
 
     override fun init() {

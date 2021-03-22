@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_graph"
+    app:startDestination="@id/example1">
+
+    <fragment
+        android:id="@+id/example1"
+        android:name="ru.bis.example1.ui.fragments.Example1"
+        android:label="Example1" />
+    <fragment
+        android:id="@+id/example2"
+        android:name="ru.bis.example2.ui.fragments.Example2"
+        android:label="Example2" />
+</navigation>
