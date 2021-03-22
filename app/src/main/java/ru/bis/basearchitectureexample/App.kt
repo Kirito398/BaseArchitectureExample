@@ -8,6 +8,8 @@ import ru.bis.example2.di.modules.CacheModule as Example2CacheModule
 import ru.bis.example1.di.modules.CacheModule as Example1CacheModule
 import ru.sir.presentation.base.BaseApplication
 import ru.sir.presentation.base.BaseDaggerComponent
+import ru.sir.recycler_view_example.di.components.RecyclerViewExampleComponent
+import ru.sir.recycler_view_example.di.modules.CacheModule as RecyclerViewExampleCacheModule
 import java.lang.IllegalArgumentException
 
 class App : BaseApplication() {
@@ -28,6 +30,7 @@ class App : BaseApplication() {
         return when(type) {
             Example1Component::class.java -> appComponent.createExample1Component().create(Example1CacheModule(this))
             Example2Component::class.java -> appComponent.createExample2Component().create(Example2CacheModule(this))
+            RecyclerViewExampleComponent::class.java -> appComponent.createRecyclerViewExampleComponent().create(RecyclerViewExampleCacheModule(this))
             else -> throw IllegalArgumentException("Dagger component not provided: $type")
         }
     }

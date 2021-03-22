@@ -1,9 +1,9 @@
-package ru.bis.example1.view_models
+package ru.sir.recycler_view_example.view_models
 
 import androidx.databinding.ObservableField
 import ru.sir.presentation.base.recycler_view.RecyclerViewBaseItem
 
-class ItemViewModel : RecyclerViewBaseItem<String, Example1ViewModel>() {
+class ItemViewModel : RecyclerViewBaseItem<String, RecyclerViewExampleViewModel>() {
     val title = ObservableField("")
 
     override fun bindData(data: String) {

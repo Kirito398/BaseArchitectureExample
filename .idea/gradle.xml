@@ -21,6 +21,8 @@
             <option value="$PROJECT_DIR$/features/example1_api" />
             <option value="$PROJECT_DIR$/features/example2" />
             <option value="$PROJECT_DIR$/features/example2_api" />
+            <option value="$PROJECT_DIR$/features/recycler_view_example" />
+            <option value="$PROJECT_DIR$/features/recycler_view_example_api" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

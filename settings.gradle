@@ -1,3 +1,5 @@
+include ':features:recycler_view_example_api'
+include ':features:recycler_view_example'
 include ':features:example1_api'
 include ':features:example2_api'
 include ':features:example2'

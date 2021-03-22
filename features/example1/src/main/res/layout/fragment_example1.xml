@@ -28,7 +28,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rvExample"
+        app:layout_constraintBottom_toTopOf="@id/nextBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
@@ -37,26 +37,14 @@
 
     <Button
         android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rvExample"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        android:text="NEXT"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvExample"
-        android:layout_height="0dp"
-        android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:recyclerAdapter="@{viewModel.recyclerViewAdapter()}"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_example1"/>
+        app:layout_constraintVertical_bias="0.95"
+        android:text="Jump to Example 2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,6 +8,7 @@
       <module name="BaseArchitectureExample.entities.presentation" target="1.8" />
       <module name="BaseArchitectureExample.features.example1" target="1.8" />
       <module name="BaseArchitectureExample.features.example2" target="1.8" />
+      <module name="BaseArchitectureExample.features.recycler_view_example" target="1.8" />
       <module name="BaseArchitectureExample.presentation" target="1.8" />
       <module name="entities" target="1.7" />
       <module name="example1_api" target="1.7" />
