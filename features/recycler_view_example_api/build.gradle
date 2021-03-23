@@ -11,5 +11,6 @@ java {
 }
 
 dependencies {
+    api project(path: ':entities:core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
