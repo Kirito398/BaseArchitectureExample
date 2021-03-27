@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/example1"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="Main"/>
+    <item
+        android:id="@+id/recyclerViewExample"
+        android:icon="@drawable/ic_baseline_article"
+        android:title="RecyclerView" />
+    <item
+        android:id="@+id/action_navigation"
+        android:icon="@drawable/ic_baseline_navigation"
+        android:title="Navigation" />
+</menu>

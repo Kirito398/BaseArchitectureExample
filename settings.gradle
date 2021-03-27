@@ -1,8 +1,11 @@
+include ':features:recycler_view_example_api'
+include ':features:recycler_view_example'
 include ':features:example1_api'
 include ':features:example2_api'
 include ':features:example2'
 include ':features:example1'
-include ':data'
-include ':entities'
+include ':entities:presentation'
+include ':entities:core'
+include ':entities:data'
 include ':app'
 rootProject.name = "BaseArchitectureExample"

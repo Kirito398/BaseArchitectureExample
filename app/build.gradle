@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "ru.bis.basearchitectureexample"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,22 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }
 
@@ -38,5 +54,6 @@ dependencies {
     implementation project(path: ':features:example1')
 
     implementation dagger
+    implementation project(path: ':features:recycler_view_example')
     kapt daggerCompiler
 }

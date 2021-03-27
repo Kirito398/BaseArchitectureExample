@@ -12,16 +12,21 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/entities" />
+            <option value="$PROJECT_DIR$/entities/core" />
+            <option value="$PROJECT_DIR$/entities/data" />
+            <option value="$PROJECT_DIR$/entities/presentation" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/example1" />
             <option value="$PROJECT_DIR$/features/example1_api" />
             <option value="$PROJECT_DIR$/features/example2" />
             <option value="$PROJECT_DIR$/features/example2_api" />
+            <option value="$PROJECT_DIR$/features/recycler_view_example" />
+            <option value="$PROJECT_DIR$/features/recycler_view_example_api" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

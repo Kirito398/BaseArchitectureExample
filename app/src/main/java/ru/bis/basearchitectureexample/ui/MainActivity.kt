@@ -1,24 +1,25 @@
 package ru.bis.basearchitectureexample.ui
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.bis.basearchitectureexample.R
-import ru.bis.basearchitectureexample.ui.fragments.Example1
-import ru.bis.basearchitectureexample.ui.fragments.Example2
+import ru.bis.example1.ui.fragments.NavActions
+import ru.sir.presentation.base.BaseActivity
+import ru.sir.presentation.navigation.UiAction
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity() {
+    override val layoutId: Int = R.layout.activity_main
+    override fun getNavController() = findNavController(R.id.navHostFragment)
 
-        openDefaultFragments()
+    override fun onActivityCreated() {
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
+        NavigationUI.setupWithNavController(bottomNavigation, navigator)
     }
 
-    private fun openDefaultFragments() {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.example1Layout, Example1())
-            .replace(R.id.example2Layout, Example2())
-            .commit()
+    override fun navigateTo(action: UiAction) {
+        when(action.id) {
+            NavActions.OPEN_EXAMPLE_2 -> { navigator.navigate(R.id.example2) }
+        }
     }
 }

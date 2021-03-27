@@ -1,0 +1,4 @@
+<resources>
+    <string name="example1_title">Example 1 Fragment</string>
+    <string name="load_data_failed">Load data from cache failed!</string>
+</resources>

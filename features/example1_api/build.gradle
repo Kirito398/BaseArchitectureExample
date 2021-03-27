@@ -4,7 +4,7 @@ apply plugin: 'kotlin'
 apply from: "$rootDir/deps/deps_versions.gradle"
 
 dependencies {
-    api project(path: ':entities')
+    api project(path: ':entities:core')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
+      <module name="BaseArchitectureExample.app" target="1.8" />
+      <module name="BaseArchitectureExample.data" target="1.8" />
+      <module name="BaseArchitectureExample.entities.data" target="1.8" />
+      <module name="BaseArchitectureExample.entities.presentation" target="1.8" />
+      <module name="BaseArchitectureExample.features.example1" target="1.8" />
+      <module name="BaseArchitectureExample.features.example2" target="1.8" />
+      <module name="BaseArchitectureExample.features.recycler_view_example" target="1.8" />
+      <module name="BaseArchitectureExample.presentation" target="1.8" />
       <module name="entities" target="1.7" />
       <module name="example1_api" target="1.7" />
       <module name="example2_api" target="1.7" />

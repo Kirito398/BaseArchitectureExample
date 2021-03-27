@@ -1,8 +1,8 @@
 package ru.bis.example1.cache
 
 import android.content.SharedPreferences
-import ru.bis.entities.Either
-import ru.bis.entities.None
+import ru.sir.core.Either
+import ru.sir.core.None
 import javax.inject.Inject
 
 class SharedPrefsManager @Inject constructor(private val prefs: SharedPreferences) {

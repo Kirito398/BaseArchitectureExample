@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+apply from: "$rootDir/deps/deps_versions.gradle"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+dependencies {
+    api project(path: ':entities:core')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}

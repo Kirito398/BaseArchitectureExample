@@ -1,9 +1,9 @@
 package ru.bis.example2_api.interactor
 
-import ru.bis.entities.AsyncUseCase
-import ru.bis.entities.Either
 import ru.bis.example2_api.interfaces.Repository
 import ru.bis.example2_api.type.Failure
+import ru.sir.core.AsyncUseCase
+import ru.sir.core.Either
 
 class GetDataFromServer(private val repository: Repository) : AsyncUseCase<String, GetDataFromServer.Params, Failure>() {
 
