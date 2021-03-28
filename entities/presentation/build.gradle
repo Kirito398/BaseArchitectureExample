@@ -54,7 +54,7 @@ dependencies {
     api navigationUi
 
     implementation lifecycleExtensions
-    annotationProcessor lifecycleCompiler
+    kapt lifecycleCompiler
 
     implementation dagger
     kapt daggerCompiler

@@ -36,6 +36,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVars()
         setListeners()
     }
 
@@ -43,5 +44,6 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
 
     protected abstract fun inject(app: BaseApplication)
     protected abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): B
+    protected open fun initVars() = Unit
     protected open fun setListeners() = Unit
 }
