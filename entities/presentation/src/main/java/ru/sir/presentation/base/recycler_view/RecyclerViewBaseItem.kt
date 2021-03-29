@@ -1,17 +1,19 @@
 package ru.sir.presentation.base.recycler_view
 
+import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import ru.sir.presentation.base.BaseViewModel
 
-abstract class RecyclerViewBaseItem<M : Any?, VM : BaseViewModel, B : ViewBinding> {
-    protected lateinit var parent: VM
+abstract class RecyclerViewBaseItem<M : Any?, B : ViewBinding> {
+    protected lateinit var parent: Fragment
     protected lateinit var binding: B
 
-    fun init(parent: VM, binding: B) {
+    fun init(parent: Fragment, binding: B) {
         this.parent = parent
         this.binding = binding
+
+        initVars()
     }
 
-    abstract fun initVars(binding: B)
+    abstract fun initVars()
     abstract fun bindData(data: M)
 }

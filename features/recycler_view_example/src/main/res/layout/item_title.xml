@@ -13,7 +13,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="@{viewModel.title}"
         tools:text="Item"
         android:textSize="15sp"
         android:textColor="#000000"

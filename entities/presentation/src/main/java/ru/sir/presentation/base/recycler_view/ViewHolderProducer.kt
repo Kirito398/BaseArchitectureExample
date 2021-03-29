@@ -1,27 +1,32 @@
 package ru.sir.presentation.base.recycler_view
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import ru.sir.presentation.base.BaseViewModel
 
-class ViewHolderProducer<M : Any, I : RecyclerViewBaseItem<M, VM, B>, VM : BaseViewModel, B : ViewBinding>
-    (val type: Int, val binding: B, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
+abstract class ViewHolderProducer<M : Any, I : RecyclerViewBaseItem<M, B>, B : ViewBinding>
+    (val type: Int, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
 
-    private lateinit var parentViewModel: VM
+    private lateinit var parent: Fragment
 
-    fun setParentViewModel(viewModel: VM) {
-        parentViewModel = viewModel
+    fun setParent(parent: Fragment) {
+        this.parent = parent
     }
 
     fun getViewType() = type
 
+    abstract fun initBinding(inflater: LayoutInflater, parent: ViewGroup): B
+
     fun produce(parent: ViewGroup): BaseViewHolder<M, I, B> {
-        return BaseViewHolder(binding, instantiateViewModel())
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = initBinding(inflater, parent)
+        return BaseViewHolder(binding, instantiateViewModel(binding))
     }
 
-    private fun instantiateViewModel(): I {
+    private fun instantiateViewModel(binding: B): I {
         val viewModelClass = itemViewModelClassType.newInstance()
-        viewModelClass.init(parentViewModel, binding)
+        viewModelClass.init(parent, binding)
         return viewModelClass
     }
 }
