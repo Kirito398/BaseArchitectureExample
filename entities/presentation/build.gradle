@@ -35,10 +35,6 @@ android {
     viewBinding {
         enabled = true
     }
-
-    dataBinding {
-        enabled = true
-    }
 }
 
 apply from: "$rootDir/deps/deps_versions.gradle"
@@ -54,6 +50,7 @@ dependencies {
     api navigationUi
 
     implementation lifecycleExtensions
+    implementation project(path: ':entities:core')
     kapt lifecycleCompiler
 
     implementation dagger

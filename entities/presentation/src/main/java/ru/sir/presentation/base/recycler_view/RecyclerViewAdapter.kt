@@ -2,64 +2,49 @@ package ru.sir.presentation.base.recycler_view
 
 import android.util.SparseArray
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.StateFlow
 import ru.sir.presentation.base.BaseViewModel
-import ru.sir.presentation.extensions.onChanged
 
-class RecyclerViewAdapter(private val producers: SparseArray<ViewHolderProducer<in Any, *, *>>) : RecyclerView.Adapter<BaseViewHolder<in Any, *>>() {
+class RecyclerViewAdapter(private val producers: SparseArray<ViewHolderProducer<in Any, *, *, *>>, private val data: StateFlow<List<RecyclerViewBaseDataModel>>)
+    : RecyclerView.Adapter<BaseViewHolder<in Any, *, *>>() {
 
-    val data = ObservableArrayList<RecyclerViewBaseDataModel>().onChanged {
-        CoroutineScope(Dispatchers.Main).launch {
-            notifyDataSetChanged()
-        }
-    }
+    class Builder<VM : BaseViewModel>(private val viewModel: VM, private val dataFlow: StateFlow<List<RecyclerViewBaseDataModel>>) {
+        private val producers = SparseArray<ViewHolderProducer<*, *, *, *>>()
 
-    class Builder<VM : BaseViewModel>(private val viewModel: VM, private val viewModelId: Int) {
-        private val producers = SparseArray<ViewHolderProducer<*, *, *>>()
-
-        fun <M : Any, I : RecyclerViewBaseItem<M, VM>> addProducer(
+        fun <M : Any, I : RecyclerViewBaseItem<M, VM, B>, B : ViewBinding> addProducer(
             type: Int,
-            @LayoutRes layoutId: Int,
+            binding: B,
             modelClassType: Class<M>,
             itemViewModelClassType: Class<I>
         ): Builder<VM> {
-            val producer: ViewHolderProducer<M, I, VM> = ViewHolderProducer(type, layoutId, modelClassType, itemViewModelClassType)
+            val producer: ViewHolderProducer<M, I, VM, B> = ViewHolderProducer(type, binding, modelClassType, itemViewModelClassType)
             return addProducer(producer)
         }
 
-        fun <M : Any, I : RecyclerViewBaseItem<M, VM>> addProducer(producer: ViewHolderProducer<M, I, VM>): Builder<VM> {
+        fun <M : Any, I : RecyclerViewBaseItem<M, VM, B>, B : ViewBinding> addProducer(producer: ViewHolderProducer<M, I, VM, B>): Builder<VM> {
             producer.setParentViewModel(viewModel)
-            producer.setViewModelId(viewModelId)
             producers.put(producer.getViewType(), producer)
             return this
         }
 
         @Suppress("UNCHECKED_CAST")
-        fun build() = RecyclerViewAdapter(producers as SparseArray<ViewHolderProducer<in Any, *, *>>)
+        fun build() = RecyclerViewAdapter(producers as SparseArray<ViewHolderProducer<in Any, *, *, *>>, dataFlow)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<in Any, *> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<in Any, *, *> {
         return producers[viewType]?.produce(parent)
             ?: throw IllegalStateException("View Holder Producer not found!")
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<in Any, *>, position: Int) {
-        holder.bindData(data[position].getData())
+    override fun onBindViewHolder(holder: BaseViewHolder<in Any, *, *>, position: Int) {
+        holder.bindData(data.value[position].getData())
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = data.value.size
 
     override fun getItemViewType(position: Int): Int {
-        return data[position].getType()
-    }
-
-    fun getObserver(f: (observer: ObservableArrayList<RecyclerViewBaseDataModel>) -> Unit): RecyclerViewAdapter {
-        f(data)
-        return this
+        return data.value[position].getType()
     }
 }
