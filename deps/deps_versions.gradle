@@ -22,6 +22,8 @@ ext {
     mpAndroidChartVersion = 'v3.1.0'
     lifecycleVersion = '2.4.0'
     navigationVersion = '2.3.4'
+    activityKtxVersion = '1.2.2'
+    fragmentKtxVersion = '1.3.2'
 
     //Lifecycle
     lifecycleExtensions = "android.arch.lifecycle:extensions:$lifecycleVersion"
@@ -79,6 +81,12 @@ ext {
     //Navigation Component
     navigationFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     navigationUi = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    //Activity kotlin
+    activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
+
+    //Fragment kotlin
+    fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
 
     //Other
     circularProgressBar = "com.mikhaellopez:circularprogressbar:$circularProgressBarVersion"

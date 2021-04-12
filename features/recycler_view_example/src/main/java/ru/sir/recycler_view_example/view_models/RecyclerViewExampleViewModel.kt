@@ -25,7 +25,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
 
     override fun init() {
         _isLoading.value = true
-        loadData(None()).launchOn(viewModelScope) { it.either({}, ::onDataLoaded) }
+        loadData(None()).launchOn(viewModelScope, ::onDataLoaded)
     }
 
     private fun onDataLoaded(data: List<Item>) {

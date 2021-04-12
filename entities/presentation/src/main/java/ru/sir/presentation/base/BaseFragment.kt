@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -31,6 +32,11 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
         viewModel.init()
 
         navigator = requireActivity() as BaseActivity
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            onBackPressed()
+        }
+
         return binding.root
     }
 
@@ -44,6 +50,7 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
 
     protected abstract fun inject(app: BaseApplication)
     protected abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): B
+    protected open fun onBackPressed() = Unit
     protected open fun initVars() = Unit
     protected open fun setListeners() = Unit
 }

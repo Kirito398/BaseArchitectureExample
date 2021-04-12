@@ -29,11 +29,10 @@ class Example2ViewModel @Inject constructor(
     private fun loadData() {
         _isLoading.value = true
 
-        getDataFromServer(GetDataFromServer.Params("Kadzuto", "Kirigaya"))
-            .launchOn(viewModelScope) {
-                it.either(::onLoadDataFailed, ::onLoadDataSuccess)
-                _isLoading.value = false
-            }
+        getDataFromServer(GetDataFromServer.Params("Kadzuto", "Kirigaya")) {
+            it.either(::onLoadDataFailed, ::onLoadDataSuccess)
+            _isLoading.value = false
+        }
     }
 
     private fun onLoadDataSuccess(data: String) {

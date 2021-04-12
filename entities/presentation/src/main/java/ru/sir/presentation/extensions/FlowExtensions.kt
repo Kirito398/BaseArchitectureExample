@@ -6,12 +6,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-fun <T> Flow<T>.launchWhenStarted(lifecycleCoroutineScope: LifecycleCoroutineScope, function: (T) -> Unit) {
+fun <T> Flow<T>.launchWhenStarted(lifecycleCoroutineScope: LifecycleCoroutineScope, function: (T) -> Unit): Flow<T> {
     lifecycleCoroutineScope.launchWhenStarted {
         this@launchWhenStarted.collect() {
             function(it)
         }
     }
+
+    return this
 }
 
 fun <T> Flow<T>.launchOn(scope: CoroutineScope, function: (T) -> Unit) {
