@@ -33,10 +33,6 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
 
         navigator = requireActivity() as BaseActivity
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            onBackPressed()
-        }
-
         return binding.root
     }
 
@@ -44,6 +40,14 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewBinding>(private val type
         super.onViewCreated(view, savedInstanceState)
         initVars()
         setListeners()
+    }
+
+    fun setBackPressedEnable(enable: Boolean) {
+        if (enable) {
+            requireActivity().onBackPressedDispatcher.addCallback(this) {
+                onBackPressed()
+            }
+        }
     }
 
     private fun provideViewModel(): T = ViewModelProviders.of(this, viewModelFactory)[type]
