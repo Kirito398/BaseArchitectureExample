@@ -1,4 +1,4 @@
-package ru.bis.data.remote
+package ru.sir.data.remote
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient

@@ -1,12 +1,14 @@
 package ru.bis.example2.view_models
 
 import android.app.Application
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import ru.bis.example2.R
 import ru.bis.example2_api.interactor.GetDataFromServer
 import ru.bis.example2_api.type.Failure
 import ru.sir.presentation.base.BaseViewModel
+import ru.sir.presentation.extensions.launchOn
 import javax.inject.Inject
 
 class Example2ViewModel @Inject constructor(
@@ -14,24 +16,27 @@ class Example2ViewModel @Inject constructor(
     private val getDataFromServer: GetDataFromServer
 ) : BaseViewModel(application) {
 
-    val isLoading = ObservableBoolean(false)
-    val text = ObservableField(context.getString(R.string.data_text))
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
+
+    private val _text = MutableStateFlow(context.getString(R.string.data_text))
+    val text = _text.asStateFlow()
 
     override fun init() {
         loadData()
     }
 
     private fun loadData() {
-        isLoading.set(true)
+        _isLoading.value = true
 
         getDataFromServer(GetDataFromServer.Params("Kadzuto", "Kirigaya")) {
             it.either(::onLoadDataFailed, ::onLoadDataSuccess)
-            isLoading.set(false)
+            _isLoading.value = false
         }
     }
 
     private fun onLoadDataSuccess(data: String) {
-        text.set(data)
+        _text.value = data
     }
 
     private fun onLoadDataFailed(failure: Failure) {

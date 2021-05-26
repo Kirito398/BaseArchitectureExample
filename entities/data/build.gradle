@@ -52,7 +52,7 @@ dependencies {
         force = true //For API 19
     }
 
-    implementation okHttpLoggingInterceptor
+    api okHttpLoggingInterceptor
 
     implementation dagger
     kapt daggerCompiler

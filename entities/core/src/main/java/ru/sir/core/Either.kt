@@ -35,3 +35,8 @@ fun <L, R> Either<L, R>.doNext(fn: (R) -> Unit): Either<L, R> {
     this.flatMap(fn.compose(::right))
     return this
 }
+
+fun <L, R> Either<L, R>.doAfter(fn: () -> Unit): Either<L, R> {
+    fn()
+    return this
+}

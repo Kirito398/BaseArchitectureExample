@@ -1,9 +1,8 @@
 package ru.sir.recycler_view_example.data
 
-import ru.sir.core.Either
-import ru.sir.core.None
+import kotlinx.coroutines.flow.Flow
 import ru.sir.recycler_view_example_api.models.Item
 
 interface Remote {
-    fun loadDataFromServer(): Either<None, List<Item>>
+    fun loadDataFromServer(): Flow<List<Item>>
 }

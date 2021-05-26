@@ -1,7 +1,8 @@
 package ru.sir.recycler_view_example.remote
 
-import ru.sir.core.Either
-import ru.sir.core.None
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import ru.sir.recycler_view_example.data.Remote
 import ru.sir.recycler_view_example_api.models.Item
 
@@ -11,8 +12,10 @@ class RemoteImpl : Remote {
         private const val RV_ITEM = 2
     }
 
-    override fun loadDataFromServer(): Either<None, List<Item>> {
-        val items = mutableListOf(
+    override fun loadDataFromServer(): Flow<List<Item>> = flow {
+        delay(1000)
+
+        emit(mutableListOf(
             Item("Title 1", RV_TITLE),
             Item("Label 1", RV_ITEM),
             Item("Title 2", RV_TITLE),
@@ -24,12 +27,6 @@ class RemoteImpl : Remote {
             Item("Label 2", RV_ITEM),
             Item("Label 3", RV_ITEM),
             Item("Label 4", RV_ITEM)
-        )
-
-        for (i in 0 .. Int.MAX_VALUE) {
-            //Имитация работы сервера
-        }
-
-        return Either.Right(items)
+        ))
     }
 }

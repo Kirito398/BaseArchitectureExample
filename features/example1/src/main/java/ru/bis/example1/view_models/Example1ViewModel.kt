@@ -1,7 +1,7 @@
 package ru.bis.example1.view_models
 
 import android.app.Application
-import androidx.databinding.ObservableField
+import kotlinx.coroutines.flow.*
 import ru.bis.example1.R
 import ru.bis.example1_api.interactor.GetDataFromCache
 import ru.sir.core.None
@@ -13,17 +13,18 @@ class Example1ViewModel @Inject constructor(
     private val getDataFromCache: GetDataFromCache
     ) : BaseViewModel(application) {
 
-    val result = ObservableField<String>()
+    private val _result = MutableStateFlow("")
+    val result: StateFlow<String> = _result.asStateFlow()
 
     override fun init() {
         getDataFromCache(None()) { it.either(::onLoadDataFromCacheFailed, ::onLoadDataFromCacheSuccess) }
     }
 
     private fun onLoadDataFromCacheSuccess(data: String) {
-        result.set(data)
+        _result.value = data
     }
 
     private fun onLoadDataFromCacheFailed(failed: None) {
-        result.set(context.getString(R.string.load_data_failed))
+        _result.value = context.getString(R.string.load_data_failed)
     }
 }

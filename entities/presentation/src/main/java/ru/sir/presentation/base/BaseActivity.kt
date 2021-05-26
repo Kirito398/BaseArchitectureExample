@@ -1,7 +1,6 @@
 package ru.sir.presentation.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import ru.sir.presentation.navigation.UiAction

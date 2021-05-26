@@ -2,39 +2,31 @@ package ru.sir.presentation.base.recycler_view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import ru.sir.presentation.base.BaseViewModel
+import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 
-class ViewHolderProducer<M : Any, I : RecyclerViewBaseItem<M, VM>, VM : BaseViewModel>(val type: Int, @LayoutRes val layoutId: Int, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
-    private lateinit var parentViewModel: VM
-    private var viewModelId: Int = -1
+abstract class ViewHolderProducer<M : Any, I : RecyclerViewBaseItem<M, B>, B : ViewBinding>
+    (val type: Int, val modelClassType: Class<M>, private val itemViewModelClassType: Class<I>) {
 
-    fun setParentViewModel(viewModel: VM) {
-        parentViewModel = viewModel
-    }
+    private lateinit var parent: Fragment
 
-    fun setViewModelId(id: Int) {
-        viewModelId = id
+    fun setParent(parent: Fragment) {
+        this.parent = parent
     }
 
     fun getViewType() = type
 
-    fun produce(parent: ViewGroup): BaseViewHolder<M, I> {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-            LayoutInflater.from(parent.context),
-            layoutId,
-            parent,
-            false
-        )
+    abstract fun initBinding(inflater: LayoutInflater, parent: ViewGroup): B
 
-        return BaseViewHolder(binding, instantiateViewModel(), viewModelId)
+    fun produce(parent: ViewGroup): BaseViewHolder<M, I, B> {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = initBinding(inflater, parent)
+        return BaseViewHolder(binding, instantiateViewModel(binding))
     }
 
-    private fun instantiateViewModel(): I {
+    private fun instantiateViewModel(binding: B): I {
         val viewModelClass = itemViewModelClassType.newInstance()
-        viewModelClass.init(parentViewModel)
+        viewModelClass.init(parent, binding)
         return viewModelClass
     }
 }

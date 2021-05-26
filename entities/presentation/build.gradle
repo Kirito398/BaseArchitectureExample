@@ -35,26 +35,28 @@ android {
     viewBinding {
         enabled = true
     }
-
-    dataBinding {
-        enabled = true
-    }
 }
 
 apply from: "$rootDir/deps/deps_versions.gradle"
 
 dependencies {
+    implementation project(path: ':entities:core')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
 
+    api activityKtx
+    api fragmentKtx
+
     api navigationFragment
     api navigationUi
 
-    implementation lifecycleExtensions
-    annotationProcessor lifecycleCompiler
+//    implementation lifecycleExtensions
+//    kapt lifecycleCompiler
+
+    implementation lifecycleViewModel
 
     implementation dagger
     kapt daggerCompiler
