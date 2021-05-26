@@ -6,30 +6,35 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.sir.presentation.extensions.launchWhenStarted
 
-class RecyclerViewAdapter(private val producers: SparseArray<ViewHolderProducer<in Any, *, *>>,
-                          private val data: StateFlow<List<RecyclerViewBaseDataModel>>,
-                          parent: Fragment) : RecyclerView.Adapter<BaseViewHolder<in Any, *, *>>() {
+class RecyclerViewAdapter<D>(private val producers: SparseArray<ViewHolderProducer<in Any, *, *>>,
+                             data: SharedFlow<D>,
+                             parent: Fragment,
+                             transform: (D) -> List<RecyclerViewBaseDataModel>) : RecyclerView.Adapter<BaseViewHolder<in Any, *, *>>() {
+    private val _data = mutableListOf<RecyclerViewBaseDataModel>()
 
     init {
         data.launchWhenStarted(parent.lifecycleScope) {
+            _data.clear()
+            _data.addAll(transform(it))
             notifyDataSetChanged()
         }
     }
 
-    class Builder<VM : Fragment>(private val parent: VM, private val dataFlow: StateFlow<List<RecyclerViewBaseDataModel>>) {
+    class Builder<VM : Fragment, D>(private val parent: VM, private val dataFlow: SharedFlow<D>) {
         private val producers = SparseArray<ViewHolderProducer<*, *, *>>()
 
-        fun <M : Any, I : RecyclerViewBaseItem<M, B>, B : ViewBinding> addProducer(producer: ViewHolderProducer<M, I, B>): Builder<VM> {
+        fun <M : Any, I : RecyclerViewBaseItem<M, B>, B : ViewBinding> addProducer(producer: ViewHolderProducer<M, I, B>): Builder<VM, D> {
             producer.setParent(parent)
             producers.put(producer.getViewType(), producer)
             return this
         }
 
         @Suppress("UNCHECKED_CAST")
-        fun build() = RecyclerViewAdapter(producers as SparseArray<ViewHolderProducer<in Any, *, *>>, dataFlow, parent)
+        fun build(transform: (D) -> List<RecyclerViewBaseDataModel>) = RecyclerViewAdapter(producers as SparseArray<ViewHolderProducer<in Any, *, *>>, dataFlow, parent, transform)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<in Any, *, *> {
@@ -38,12 +43,12 @@ class RecyclerViewAdapter(private val producers: SparseArray<ViewHolderProducer<
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<in Any, *, *>, position: Int) {
-        holder.bindData(data.value[position].getData())
+        holder.bindData(_data[position].getData())
     }
 
-    override fun getItemCount(): Int = data.value.size
+    override fun getItemCount(): Int = _data.size
 
     override fun getItemViewType(position: Int): Int {
-        return data.value[position].getType()
+        return _data[position].getType()
     }
 }

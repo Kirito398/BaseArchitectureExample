@@ -20,7 +20,7 @@ class RecyclerViewExampleViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading = _isLoading.asStateFlow()
 
-    private val _items = MutableStateFlow<List<RecyclerViewBaseDataModel>>(emptyList())
+    private val _items = MutableStateFlow<List<Item>>(emptyList())
     var items = _items.asStateFlow()
 
     override fun init() {
@@ -29,13 +29,13 @@ class RecyclerViewExampleViewModel @Inject constructor(
     }
 
     private fun onDataLoaded(data: List<Item>) {
-        _items.value = data.toRecyclerViewItems()
+        _items.value = data
         _isLoading.value = false
     }
 
-    private fun List<Item>.toRecyclerViewItems(): List<RecyclerViewBaseDataModel> {
+    fun toRecyclerViewItems(items: List<Item>): List<RecyclerViewBaseDataModel> {
         val newList = mutableListOf<RecyclerViewBaseDataModel>()
-        this.forEach { newList.add(RecyclerViewBaseDataModel(it.name, it.type)) }
+        items.forEach { newList.add(RecyclerViewBaseDataModel(it.name, it.type)) }
         return newList
     }
 }

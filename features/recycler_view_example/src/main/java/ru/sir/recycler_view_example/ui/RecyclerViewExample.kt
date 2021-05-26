@@ -40,5 +40,5 @@ class RecyclerViewExample : BaseFragment<RecyclerViewExampleViewModel, FragmentR
     private fun recyclerViewAdapter() = RecyclerViewAdapter.Builder(this, viewModel.items)
         .addProducer(TitleViewHolderProducer())
         .addProducer(ItemViewHolderProducer())
-        .build()
+        .build(viewModel::toRecyclerViewItems)
 }

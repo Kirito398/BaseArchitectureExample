@@ -3,6 +3,7 @@ package ru.sir.presentation.extensions
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -22,4 +23,11 @@ fun <T> Flow<T>.launchOn(scope: CoroutineScope, function: (T) -> Unit) {
             function(it)
         }
     }
+}
+
+fun <D> MutableStateFlow<List<D>>.add(value: D) {
+    val newList = mutableListOf<D>()
+    newList.addAll(this.value)
+    newList.add(value)
+    this.value = newList
 }
