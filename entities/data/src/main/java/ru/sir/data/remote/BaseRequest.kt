@@ -1,4 +1,4 @@
-package ru.bis.data.remote
+package ru.sir.data.remote
 
 import retrofit2.Call
 import retrofit2.Response

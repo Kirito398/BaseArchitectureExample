@@ -1,4 +1,4 @@
-package ru.bis.data.remote
+package ru.sir.data.remote
 
 import android.content.Context
 import android.net.ConnectivityManager
